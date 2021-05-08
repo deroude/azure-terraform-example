@@ -1,7 +1,7 @@
 # this will create Azure resource group
-az group create --location westeu --name $Env:terraformstoragerg
+az group create --location westeurope --name $Env:terraformstoragerg
 
-az storage account create --name $Env:terraformstorageaccount --resource-group $Env:terraformstoragerg --location westeu --sku Standard_LRS
+az storage account create --name $Env:terraformstorageaccount --resource-group $Env:terraformstoragerg --location westeurope --sku Standard_LRS
 
 az storage container create --name terraform --account-name $Env:terraformstorageaccount
 
