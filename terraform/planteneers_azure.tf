@@ -29,8 +29,8 @@ resource "azurerm_app_service_plan" "plt_be_plan" {
   reserved            = true
   
   sku {
-    tier = "Free"
-    size = "F1"
+    tier = "Standard"
+    size = "S1"
   }
 }
 
