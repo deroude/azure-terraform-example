@@ -7,26 +7,22 @@ provider "azurerm" {
 }
 
 variable "environment" {
-    type = object({
-        tag = string
-    })
-    default = {
-        tag = "dev"
-    }
+    type = string
+    default = "dev"
 }
 
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "rg" {
-    name     = "rg-${var.environment.tag}"
+    name     = "rg-${var.environment}"
     location = "westeurope"
 
     tags = {
-        environment = var.environment.tag
+        environment = var.environment
     }
 }
 
 resource "azurerm_app_service_plan" "plt_be_plan" {
-  name                = "plt-be-plan-${var.environment.tag}"
+  name                = "plt-be-plan-${var.environment}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   kind                = "Linux"
@@ -39,14 +35,14 @@ resource "azurerm_app_service_plan" "plt_be_plan" {
 }
 
 resource "azurerm_app_service" "plt_be" {
-  name                = "plt-be-${var.environment.tag}"
+  name                = "plt-be-${var.environment}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.plt_be_plan.id
 }
 
 resource "azurerm_storage_account" "plt_fe" {
-  name                     = "pltfe${var.environment.tag}"
+  name                     = "pltfe${var.environment}"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_kind             = "StorageV2"
@@ -59,6 +55,6 @@ resource "azurerm_storage_account" "plt_fe" {
   }
 
   tags = {
-    environment = var.environment.tag
+    environment = var.environment
   }
 }
