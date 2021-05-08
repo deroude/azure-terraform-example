@@ -15,22 +15,10 @@ variable "environment" {
     }
 }
 
-variable "resource_group" {
-  type = object({
-    name    = string
-    location = string
-  })
-  description = "The resource group to be deployed"
-  default = {
-      name = "rg-dev"
-      location = "West Europe"
-  }
-}
-
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "rg" {
-    name     = var.resource_group.name
-    location = var.resource_group.location
+    name     = "rg-${var.environment.tag}"
+    location = "westeurope"
 
     tags = {
         environment = var.environment.tag
