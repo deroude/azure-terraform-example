@@ -11,6 +11,15 @@ variable "environment" {
     default = "dev"
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name   = "plt-tf-stg-rg"
+    storage_account_name  = "plttfstgacc"
+    container_name        = "terraform"
+    key                   = "terraform_${var.environment}.tfstate"
+  }
+}
+
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "rg" {
     name     = "rg-${var.environment}"
