@@ -69,8 +69,8 @@ resource "azurerm_storage_account" "plt_fe" {
   }
 }
 
-resource "azurerm_storage_share" "config_share" {
-  name                 = "config"
-  storage_account_name = azurerm_storage_account.plt_fe.name
-  quota                = 1
+resource "azurerm_storage_container" "config" {
+  name                  = "config"
+  storage_account_name  = azurerm_storage_account.plt_fe.name
+  container_access_type = "private"
 }
