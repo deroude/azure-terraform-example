@@ -10,6 +10,9 @@ trigger:
   paths:
     include:
     - web
+    exclude:
+    - api
+    - terraform
 
 pool:
   vmImage: ubuntu-latest
