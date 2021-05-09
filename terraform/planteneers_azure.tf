@@ -49,6 +49,7 @@ resource "azurerm_storage_account" "plt_fe" {
   account_tier             = "Standard"
   account_replication_type = "GRS"
   enable_https_traffic_only = true
+  allow_blob_public_access  = true
 
   static_website {
     index_document = "index.html"
