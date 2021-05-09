@@ -5,7 +5,12 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - terraform
 
 pool:
   vmImage: ubuntu-latest
