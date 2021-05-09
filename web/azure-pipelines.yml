@@ -29,3 +29,16 @@ steps:
     npm ci
     ng build --prod
   displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'web/dist'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)/web'
+    CleanTargetFolder: true
+    OverWrite: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'web'
+    publishLocation: 'Container'
