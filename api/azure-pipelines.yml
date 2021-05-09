@@ -35,3 +35,6 @@ steps:
     repository: 'plt-api'
     command: 'buildAndPush'
     Dockerfile: 'api/Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      latest
